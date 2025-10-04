@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de IAs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+    <div class="header-content">
+        <h1>Lista de Inteligências Artificiais</h1>
+        <p>Uma coleção de IAs para facilitar a busca pelo nome e principais usos.</p>
+        <p class="author-info">Desenvolvido por Fabrício Tonetto Londero | 
+            <a href="https://github.com/Ernakh/" target="_blank">GitHub</a> | 
+            <a href="https://fabriciolondero.blogspot.com/" target="_blank">Blog</a> | 
+			<a href="https://www.linkedin.com/in/fabriciolondero/" target="_blank">LinkedIn</a>
+        </p>
+    </div>
+</header>
+    <section id="filters">
+        <input type="text" id="search-input" placeholder="Busque por nome, descrição ou tag...">
+        <div id="tag-filters">
+        </div>
+    </section>
+    <main id="ai-list">
+        <!-- Os cards das IAs serão gerados aqui via JavaScript -->
+    </main>
+	<footer>
+		<div class="footer-content">
+			<img src="logofabricio.png" alt="Logo do Fabrício" class="footer-logo">
+		</div>
+	</footer>
+    <script>
+		const ais = [
+			{
+				name: "ChatGPT",
+				logo: "img/gpt.png",
+				link: "https://chat.openai.com",
+				description: "IA de conversação para dúvidas, redação e ideias.",
+				tags: ["conversacional", "escrita", "ideias"]
+			},
+			{
+				name: "Perplexity",
+				logo: "img/perplexity.png",
+				link: "https://www.perplexity.ai/",
+				description: "Ferramenta de busca com respostas baseadas em IA, com fontes confiáveis e contextualização.",
+				tags: ["busca", "pesquisa", "fontes"]
+			},
+			{
+				name: "Gemini",
+				logo: "img/gemini.png",
+				link: "https://gemini.google.com/",
+				description: "IA generativa do Google que responde perguntas, cria conteúdos e auxilia nos estudos com integração aos serviços Google.",
+				tags: ["conversacional", "multimodal", "integração"]
+			},
+			{
+				name: "Consensus",
+				logo: "img/consensus.png",
+				link: "https://consensus.app/",
+				description: "IA para busca de artigos e interação de leituras e partes de cada artigo.",
+				tags: ["pesquisa", "artigos", "ciência"]
+			},
+			{
+				name: "Kimi",
+				logo: "img/kimi.png",
+				link: "https://www.kimi.com/",
+				description: "Assistente de IA avançado da Moonshot AI, com suporte a contexto de até 2 milhões de palavras, análise de arquivos e busca autônoma na web.",
+				tags: ["conversacional", "pesquisa", "análise de arquivos"]
+			},
+			{
+				name: "Poe",
+				logo: "img/poe.png",
+				link: "https://poe.com/",
+				description: "Plataforma que dá acesso a múltiplos modelos de IA como GPT, Claude e Gemini em uma única interface, para conversas, criação de bots e geração multimídia.",
+				tags: ["conversacional", "múltiplos modelos", "criação de bots"]
+			},
+			{
+				name: "Ideogram",
+				logo: "img/ideogram.png",
+				link: "https://ideogram.ai/",
+				description: "Gerador de imagens com IA que transforma prompts textuais em designs impressionantes, logos e posters, com foco em consistência de personagens e integração de texto.",
+				tags: ["imagem", "design", "logos"]
+			},
+			{
+				name: "Renderforest",
+				logo: "img/renderForest.webp",
+				link: "https://www.renderforest.com/",
+				description: "Plataforma all-in-one para criar vídeos profissionais, logos, mockups, sites e gráficos, com templates personalizáveis e ferramentas de IA para edição rápida.",
+				tags: ["vídeo", "design", "websites"]
+			},
+			{
+				name: "OpusClip",
+				logo: "img/opusclip.png",
+				link: "https://www.opus.pro/",
+				description: "Ferramenta de IA para transformar vídeos longos em clipes virais curtos para redes sociais, com geração de B-rolls e legendas automáticas.",
+				tags: ["vídeo", "edição", "shorts"]
+			},
+			{
+				name: "StarryAI",
+				logo: "img/starryai.png",
+				link: "https://starryai.com/",
+				description: "Gerador de arte com IA que cria imagens, ilustrações e fotos a partir de prompts textuais, com estilos personalizáveis e suporte a resoluções variadas.",
+				tags: ["imagem", "arte", "ilustrações"]
+			},
+			{
+				name: "Asta",
+				logo: "img/asta.jpg",
+				link: "https://allenai.org/asta",
+				description: "Ecossistema de agentes de IA para pesquisa científica, incluindo benchmarks e ferramentas para tarefas complexas como análise de evidências e formulação de perguntas.",
+				tags: ["pesquisa", "ciência", "agentes"]
+			},
+			{
+				name: "Lovable",
+				logo: "img/lovable.jpg",
+				link: "https://lovable.dev/",
+				description: "Construtor de software com IA que permite criar apps e websites via interface de chat, ideal para protótipos, ferramentas internas e produtos B2B.",
+				tags: ["desenvolvimento", "apps", "websites"]
+			},
+			{
+				name: "ElevenLabs",
+				logo: "img/elevenlabs.png",
+				link: "https://elevenlabs.io/",
+				description: "Gerador de voz com IA para texto-para-fala realista em 70+ idiomas, com clonagem de voz e APIs para integração em apps e conteúdos.",
+				tags: ["voz", "áudio", "texto-para-fala"]
+			},
+			{
+				name: "Fliki",
+				logo: "img/floki.png",
+				link: "https://fliki.ai/",
+				description: "Transforma texto em vídeos com vozes de IA realistas, avatares e clipes dinâmicos, suportando 80+ idiomas e clonagem de voz para conteúdo personalizado.",
+				tags: ["vídeo", "voz", "texto-para-vídeo"]
+			},
+			{
+				name: "Leonardo",
+				logo: "img/leonardo.png",
+				link: "https://leonardo.ai/",
+				description: "Gere imagens criativas a partir de descrições textuais.",
+				tags: ["imagem", "criação", "arte"]
+			},
+						{
+				name: "Midjourney",
+				logo: "img/midjourney.svg",
+				link: "https://www.midjourney.com/",
+				description: "Gera imagens artísticas e visuais a partir de prompts textuais para ilustrações educacionais.",
+				tags: ["imagem", "arte", "visual"]
+			},
+			{
+				name: "SciSpace",
+				logo: "img/scispace.jpg",
+				link: "https://typeset.io/",
+				description: "IA para busca de artigos e interação de leituras e partes de cada artigo.",
+				tags: ["pesquisa", "artigos", "leitura"]
+			},
+			{
+				name: "DeepSeek",
+				logo: "img/deepseek.png",
+				link: "https://chat.deepseek.com/",
+				description: "IA de conversação para dúvidas, redação e ideias.",
+				tags: ["conversacional", "escrita", "programação"]
+			},
+			{
+				name: "NotebookLM",
+				logo: "img/notebooklm.png",
+				link: "https://notebooklm.google.com/",
+				description: "Assistente de pesquisa e anotações inteligente, projetado para otimizar a organização e o acesso à informação.",
+				tags: ["pesquisa", "anotações", "organização"]
+			},
+			{
+				name: "Elicit",
+				logo: "img/elicit.jpg",
+				link: "https://elicit.org/",
+				description: "Assistente de pesquisa que automatiza revisões sistemáticas e extração de dados.",
+				tags: ["pesquisa", "revisão", "dados"]
+			},
+			{
+				name: "DeepL",
+				logo: "img/deepl.svg",
+				link: "https://www.deepl.com/translator",
+				description: "IA para tradução e escrita em diversas línguas.",
+				tags: ["tradução", "escrita", "línguas"]
+			},
+			{
+				name: "Napkin",
+				logo: "img/napkin.webp",
+				link: "https://napkin.ai/",
+				description: "Ferramenta que transforma texto em diagramas automaticamente.",
+				tags: ["diagramas", "visualização", "design"]
+			},
+			{
+				name: "Heurística",
+				logo: "img/heuristica.png",
+				link: "https://www.heuristi.ca/",
+				description: "Facilita a aprendizagem visual e investigação por meio de mapas conceptuais e mentais.",
+				tags: ["aprendizagem", "mapas", "visual"]
+			},
+			{
+				name: "Copilot",
+				logo: "img/capilot.jpg",
+				link: "https://github.com/features/copilot",
+				description: "IA de conversação para dúvidas, redação e ideias, integrada ao GitHub.",
+				tags: ["conversacional", "programação", "código"]
+			},
+			{
+				name: "Qwen",
+				logo: "img/qwen.jpg",
+				link: "https://chat.qwen.ai/",
+				description: "IA de conversação para dúvidas, redação e ideias.",
+				tags: ["conversacional", "escrita", "geral"]
+			},
+			{
+				name: "Bohrium",
+				logo: "img/bohrium.jpg",
+				link: "https://bohrium.com/",
+				description: "Plataforma que utiliza inteligência artificial para acelerar descobertas científicas.",
+				tags: ["ciência", "pesquisa", "simulação"]
+			},
+			{
+				name: "GitMind",
+				logo: "img/gitmind.jpg",
+				link: "https://gitmind.com/",
+				description: "Crie mapas mentais, fluxogramas e organogramas com colaboração em tempo real.",
+				tags: ["mapas", "colaborativo", "visual"]
+			},
+			{
+				name: "Research Rabbit",
+				logo: "img/ResearchRabbit.png",
+				link: "https://www.researchrabbit.ai/",
+				description: "Explore artigos, autores e conexões científicas com mapas visuais interativos.",
+				tags: ["mapas", "conexões", "artigos"]
+			},
+			{
+				name: "Manus",
+				logo: "img/manus.png",
+				link: "https://manus.im/app",
+				description: "Diagnóstico e correção de código por IA, ideal para programadores e equipes técnicas.",
+				tags: ["programação", "código", "debug"]
+			},
+			{
+				name: "Litmaps",
+				logo: "img/litmaps.jpg",
+				link: "https://www.litmaps.com/",
+				description: "Descubra artigos científicos conectados por mapas visuais interativos de literatura.",
+				tags: ["mapas", "literatura", "ciência"]
+			},
+			{
+				name: "Gamma",
+				logo: "img/gamma.jpg",
+				link: "https://gamma.app/",
+				description: "Crie apresentações modernas e interativas com o apoio de IA em segundos.",
+				tags: ["apresentações", "design", "criação"]
+			},
+			{
+				name: "Avidnote",
+				logo: "img/avidnote.png",
+				link: "https://avidnote.com/",
+				description: "Editor de anotações acadêmicas com estruturação e organização por IA.",
+				tags: ["anotações", "organização", "acadêmico"]
+			},
+			{
+				name: "Claude",
+				logo: "img/claude.svg",
+				link: "https://claude.ai/",
+				description: "IA conversacional avançada da Anthropic, focada em segurança e contexto expandido.",
+				tags: ["conversacional", "ético", "raciocínio"]
+			},
+			{
+				name: "GenSpark",
+				logo: "img/genspark.jpg",
+				link: "https://genspark.ai/",
+				description: "Gere histórias, ideias e conteúdos criativos com IA treinada em storytelling.",
+				tags: ["criação", "histórias", "ideias"]
+			},
+			{
+				name: "Presentations.AI",
+				logo: "img/presentation.png",
+				link: "https://www.presentations.ai/",
+				description: "Criação automática de apresentações com design profissional e conteúdo inteligente.",
+				tags: ["apresentações", "design", "automático"]
+			},
+			{
+				name: "Grok",
+				logo: "img/grok.svg",
+				link: "https://grok.x.ai",
+				description: "IA conversacional da xAI para respostas úteis em estudos, com foco em raciocínio e fatos.",
+				tags: ["conversacional", "raciocínio", "estudos"]
+			},
+			{
+				name: "Grammarly",
+				logo: "img/grammarly.png",
+				link: "https://www.grammarly.com/",
+				description: "Assistente de escrita que corrige gramática, estilo e clareza em tempo real.",
+				tags: ["escrita", "gramática", "edição"]
+			},
+			{
+				name: "Otter.ai",
+				logo: "img/otter.png",
+				link: "https://otter.ai/",
+				description: "Transcreve palestras e reuniões em tempo real, com resumos e buscas por IA.",
+				tags: ["transcrição", "reuniões", "resumos"]
+			},
+			{
+				name: "Wolfram Alpha",
+				logo: "img/wolframalpha.png",
+				link: "https://www.wolframalpha.com/",
+				description: "Motor computacional para resolver problemas matemáticos e científicos.",
+				tags: ["matemática", "cálculo", "ciência"]
+			},
+			{
+				name: "Zotero",
+				logo: "img/zotero.png",
+				link: "https://www.zotero.org/",
+				description: "Gerenciador de referências com integração de IA para organização de bibliografias.",
+				tags: ["referências", "bibliografia", "organização"]
+			},
+			{
+				name: "QuillBot",
+				logo: "img/quillbot.jpg",
+				link: "https://quillbot.com/",
+				description: "Paráfrase e resumidor de texto impulsionado por IA para escrita acadêmica.",
+				tags: ["paráfrase", "resumo", "escrita"]
+			},
+			{
+				name: "Jasper",
+				logo: "img/jasper.png",
+				link: "https://www.jasper.ai/",
+				description: "Gerador de conteúdo para redações, artigos e ideias criativas.",
+				tags: ["geração de texto", "conteúdo", "criatividade"]
+			},
+			{
+				name: "Notion AI",
+				logo: "img/notion.png",
+				link: "https://www.notion.so/product/ai",
+				description: "Integração de IA no Notion para anotações, resumos e automação de tarefas de estudo.",
+				tags: ["anotações", "automação", "produtividade"]
+			},
+			{
+				name: "Humata AI",
+				logo: "img/humata.jpg",
+				link: "https://www.humata.ai/",
+				description: "Pergunte e responda sobre PDFs e documentos acadêmicos com IA.",
+				tags: ["PDF", "documentos", "perguntas"]
+			}
+			// Adicione mais IAs aqui...
+		];
+
+        let selectedTags = new Set();
+
+        // Função para gerar tags únicas
+        function getUniqueTags() {
+            const allTags = new Set();
+            ais.forEach(ai => ai.tags.forEach(tag => allTags.add(tag)));
+            return Array.from(allTags);
+        }
+
+        // Função para gerar botões de tags
+        function renderTagFilters() {
+            const container = document.getElementById('tag-filters');
+            const uniqueTags = getUniqueTags();
+            uniqueTags.forEach(tag => {
+                const button = document.createElement('button');
+                button.textContent = tag;
+                button.classList.add('tag-button');
+                button.onclick = () => toggleTag(button, tag);
+                container.appendChild(button);
+            });
+        }
+
+        // Função para toggle de tag selecionada
+        function toggleTag(button, tag) {
+            if (selectedTags.has(tag)) {
+                selectedTags.delete(tag);
+                button.classList.remove('active');
+            } else {
+                selectedTags.add(tag);
+                button.classList.add('active');
+            }
+            filterAndRender();
+        }
+
+        // Função para filtrar e renderizar os cards
+        function filterAndRender() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const filteredAis = ais.filter(ai => {
+                const matchesSearch = ai.name.toLowerCase().includes(searchTerm) ||
+                                      ai.description.toLowerCase().includes(searchTerm) ||
+                                      ai.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                const matchesTags = selectedTags.size === 0 || ai.tags.some(tag => selectedTags.has(tag));
+                return matchesSearch && matchesTags;
+            });
+
+            const container = document.getElementById('ai-list');
+            container.innerHTML = ''; // Limpa os cards existentes
+
+            filteredAis.forEach(ai => {
+                const card = document.createElement('div');
+                card.classList.add('ai-card');
+                
+                const img = document.createElement('img');
+                img.src = ai.logo;
+                img.alt = `${ai.name} logo`;
+                img.classList.add('ai-logo');
+                
+                const name = document.createElement('h2');
+                name.textContent = ai.name;
+                name.classList.add('ai-name');
+                
+                const desc = document.createElement('p');
+                desc.textContent = ai.description;
+                desc.classList.add('ai-desc');
+                
+                const tagsDiv = document.createElement('div');
+                tagsDiv.classList.add('ai-tags');
+                ai.tags.forEach(tag => {
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    tagsDiv.appendChild(span);
+                });
+                
+                const button = document.createElement('a');
+                button.href = ai.link;
+                button.target = "_blank";
+                button.textContent = "ACESSAR";
+                button.classList.add('ai-button');
+                
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(desc);
+                card.appendChild(tagsDiv);
+                card.appendChild(button);
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Evento para busca em tempo real
+        document.getElementById('search-input').addEventListener('input', filterAndRender);
+
+        // Chama as funções ao carregar a página
+        window.onload = () => {
+            renderTagFilters();
+            filterAndRender();
+        };
+    </script>
+</body>
+</html>
